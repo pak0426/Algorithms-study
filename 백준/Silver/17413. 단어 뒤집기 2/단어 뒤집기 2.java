@@ -28,11 +28,12 @@ public class Main {
                 continue;
             }
 
-            if (flag && c == ' ') {
+            if (flag) {
                 sb.append(c);
                 continue;
             }
-            else if (!flag && c == ' ') {
+
+            if (c == ' ') {
                 while (!stack.isEmpty()) {
                     sb.append(stack.pop());
                 }
@@ -40,17 +41,13 @@ public class Main {
                 continue;
             }
 
-            if (flag) {
-                sb.append(c);
-            }
-            else {
-                stack.push(c);
-            }
+            stack.push(c);
         }
 
         while (!stack.isEmpty()) {
             sb.append(stack.pop());
         }
+
         bw.write(sb.toString());
         bw.flush();
         bw.close();
