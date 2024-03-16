@@ -7,7 +7,6 @@ class Solution {
         Arrays.sort(lost);
         Arrays.sort(reserve);
         
-        // 여벌 체육복을 가져온 학생 중 도난 당한 학생을 찾아 값을 바꿔줌
         for (int i = 0; i < lost.length; i++) {
             for (int j = 0; j < reserve.length; j++) {
                 if (lost[i] == reserve[j]) {
