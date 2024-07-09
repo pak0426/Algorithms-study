@@ -6,14 +6,14 @@ class Solution {
      */ 
     public int[] solution(int[] numbers) {
         int[] answer = {};
-        List<Integer> list = new ArrayList<Integer>();
-        int index = 0;
+        // 중복이 없는 컬렉션 Set을 이용
+        Set<Integer> set = new HashSet<Integer>();
         for (int i = 0; i < numbers.length; i++) {
-            for (int j = i+1; j < numbers.length; j++) {
-                list.add(numbers[i] + numbers[j]);
+            for (int j = i + 1; j < numbers.length; j++) {
+                set.add(numbers[i] + numbers[j]);
             }
         }
-        answer = list.stream().distinct().sorted().mapToInt(Integer::intValue).toArray();
+        answer = set.stream().sorted().mapToInt(i -> i.intValue()).toArray();
         return answer;
     }
 }
