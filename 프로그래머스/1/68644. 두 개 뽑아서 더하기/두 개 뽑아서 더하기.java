@@ -13,7 +13,7 @@ class Solution {
                 set.add(numbers[i] + numbers[j]);
             }
         }
-        answer = set.stream().sorted().mapToInt(i -> i.intValue()).toArray();
+        answer = set.stream().sorted().mapToInt(Integer::intValue).toArray();
         return answer;
     }
 }
