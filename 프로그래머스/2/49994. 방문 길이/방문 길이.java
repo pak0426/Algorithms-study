@@ -12,15 +12,10 @@ class Solution {
     private int y = 5;
     
     public int solution(String dirs) {
-        int answer = 0;        
-        
         Set<String> set = new HashSet<>();
-        
-        int nx = 0;
-        int ny = 0;
         for (int i = 0; i < dirs.length(); i++) {      
-            
             String before = x + " " + y;
+            
             if (dirs.charAt(i) == 'U') {
                 if (!up()) continue;
             } else if (dirs.charAt(i) == 'D') {
@@ -30,15 +25,11 @@ class Solution {
             } else {
                 if (!right()) continue;
             }
-            nx = x;
-            ny = y;
             
-            String after = nx + " " + ny;
+            String after = x + " " + y;
             set.add(before + "^" + after);
             set.add(after + "^" + before);
         }
-        System.out.println(x + ", " + y);
-        System.out.println(set);
         
         return set.size() / 2;
     }
