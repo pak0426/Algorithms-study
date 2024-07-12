@@ -8,61 +8,48 @@
 import java.util.*;
 
 class Solution {
-    private int x = 5;
-    private int y = 5;
+    // 다음 좌표 결정을 위한 Map 생성
+    private static final Map<Character, int[]> location = new HashMap<>();
     
     public int solution(String dirs) {
-        Set<String> set = new HashSet<>();
-        for (int i = 0; i < dirs.length(); i++) {      
-            String before = x + " " + y;
+        initLocation();
+        int x = 5, y = 5;
+        
+        // 똑같은 경로 이동 시 중복을 제거하기 위함
+        Set<String> answer = new HashSet<>();
+        
+        for (int i = 0; i < dirs.length(); i++) {
+            int[] offset = location.get(dirs.charAt(i));
+            int nx = x + offset[0];
+            int ny = y + offset[1];
             
-            if (dirs.charAt(i) == 'U') {
-                if (!up()) continue;
-            } else if (dirs.charAt(i) == 'D') {
-                if (!down()) continue;
-            } else if (dirs.charAt(i) == 'L') {
-                if (!left()) continue;
-            } else {
-                if (!right()) continue;
+            // 이동가능한 좌표인지 검증
+            if (!isValidMove(nx, ny)) {
+                continue;
             }
             
-            String after = x + " " + y;
-            set.add(before + "^" + after);
-            set.add(after + "^" + before);
+            // A -> B로 이동한 이전, 이후 좌표 기록
+            answer.add(x + " " + y + " " + nx + " " + ny);
+            
+            // B -> A로 이동한 좌표 기록 ( 동일한 이동경로는 1개로 치기 때문 )
+            answer.add(nx + " " + ny + " " + x + " " + y);
+            
+            // 좌표를 이동했으므로 초기화
+            x = nx;
+            y = ny;            
         }
-        
-        return set.size() / 2;
+        return answer.size() / 2;
     }
     
-    public boolean left() {
-        if (x <= 0) {
-            return false;
-        }
-        x -= 1;
-        return true;
+
+    private static void initLocation() {
+        location.put('U', new int[]{0, 1});
+        location.put('D', new int[]{0, -1});
+        location.put('L', new int[]{-1, 0});
+        location.put('R', new int[]{1, 0});
     }
     
-    public boolean right() {
-        if (x >= 10) {
-            return false;
-        }
-        x += 1;
-        return true;
-    }
-    
-    public boolean up() {
-        if (y >= 10) {
-            return false;
-        }
-        y += 1;
-        return true;
-    }
-    
-    public boolean down() {
-        if (y <= 0) {
-            return false;
-        }
-        y -= 1;
-        return true;
+    private static boolean isValidMove(int nx, int ny) {
+        return 0 <= nx && nx < 11 && 0 <= ny && ny < 11;
     }
 }
