@@ -14,34 +14,19 @@ import java.util.*;
 
 class Solution {
     public String solution(String[] participant, String[] completion) {
-        Map<String, Integer> pMap = new HashMap<>();
+        Map<String, Integer> map = new HashMap<>();
         
-        for (int i = 0; i < participant.length; i++) {
-            
-            if (pMap.containsKey(participant[i])) {
-                int count = pMap.get(participant[i]);
-                pMap.put(participant[i], ++count);
-            }
-            else {
-                pMap.put(participant[i], 1);
-            }            
+        for (String str : completion) {
+            map.put(str, map.getOrDefault(str, 0) + 1);
         }
         
-        
-        for (int i = 0; i < completion.length; i++) {
-            String complete = completion[i];
-            if (pMap.containsKey(complete)) {
-                
-                int count = pMap.get(complete);
-                if (count == 1) {
-                    pMap.remove(complete);
-                }
-                else {
-                    pMap.put(complete, --count);
-                }
+        for (String str : participant) {
+            if (map.getOrDefault(str, 0) == 0) {
+                return str;
             }
+            map.put(str, map.get(str) - 1);
         }
         
-        return pMap.keySet().iterator().next();
+        return "";
     }
 }
