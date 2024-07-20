@@ -8,45 +8,24 @@
 import java.util.*;
 class Solution {
     public String solution(String[] cards1, String[] cards2, String[] goal) {
-        String answer = "No";
+        ArrayDeque<String> cardsDeque1 = new ArrayDeque<>(Arrays.asList(cards1));
+        ArrayDeque<String> cardsDeque2 = new ArrayDeque<>(Arrays.asList(cards2));
+        ArrayDeque<String> goalDeque = new ArrayDeque<>(Arrays.asList(goal));
         
-        ArrayDeque<String> deque1 = new ArrayDeque<>();
-        ArrayDeque<String> deque2 = new ArrayDeque<>();
-
-        for (int i = 0; i < cards1.length; i++) {
-            deque1.addLast(cards1[i]);
-        }
-        
-        for (int i = 0; i < cards2.length; i++) {
-            deque2.addLast(cards2[i]);
-        }
-        
-        int count = 0;
-        List<String> list = new ArrayList<>();
-        A:for (int i = 0; i < goal.length; i++) {
-            String word = goal[i];
-            
-            for (int j = 0; j < deque1.size(); j++) {
-                if (word.equals(deque1.peekFirst())) {
-                    count++;
-                    list.add(deque1.pollFirst());
-                    continue A;
-                }
+        while (!goalDeque.isEmpty()) {
+            if (!cardsDeque1.isEmpty() && cardsDeque1.peekFirst().equals(goalDeque.peekFirst())) {
+                cardsDeque1.pollFirst();
+                goalDeque.pollFirst();
             }
-            
-            for (int j = 0; j < deque2.size(); j++) {
-                if (word.equals(deque2.peekFirst())) {
-                    count++;
-                    list.add(deque2.pollFirst());
-                    continue A;
-                }
+            else if (!cardsDeque2.isEmpty() && cardsDeque2.peekFirst().equals(goalDeque.peekFirst())) {
+                cardsDeque2.pollFirst();
+                goalDeque.pollFirst();   
+            }
+            else {
+                break;
             }
         }
         
-        if (count == goal.length) {
-            answer = "Yes";
-        }
-        
-        return answer;
+        return goalDeque.isEmpty() ? "Yes" : "No";
     }
 }
