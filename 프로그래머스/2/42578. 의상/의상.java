@@ -12,34 +12,17 @@ import java.util.*;
 
 class Solution {
     public int solution(String[][] clothes) {
-        int answer = 0;
-        
-        Map<String, HashSet<String>> map = new HashMap<>();
-        for (int i = 0; i < clothes.length; i ++) {
-            HashSet<String> list;
+        Map<String, Integer> map = new HashMap<>();
+        for (int i = 0; i < clothes.length; i++) {
             String category = clothes[i][1];
-            String wear = clothes[i][0];
-            
-            if (map.containsKey(category)) {
-                list = map.get(category);
-            } 
-            else {
-                list = new HashSet<>();
-            }
-            list.add(wear);
-            map.put(category, list);
+            map.put(category, map.getOrDefault(category, 0) + 1);
         }
         
-        List<Integer> list = new ArrayList<>();
-        map.entrySet().stream()
-                .forEach(m -> list.add(m.getValue().size()));
-
-
-        int multiple = 1;
-        for (int i = 0; i < list.size(); i++) {
-            multiple *= list.get(i) + 1;
+        int answer = 1;
+        for (Integer value : map.values()) {
+            answer *= value + 1;
         }
         
-        return multiple - 1;
+        return answer - 1;
     }
 }
