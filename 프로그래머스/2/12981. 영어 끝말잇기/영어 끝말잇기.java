@@ -12,24 +12,16 @@ class Solution {
     public int[] solution(int n, String[] words) {
         int[] answer = new int[2];
 
-        int loop = 0;
         Set<String> set = new HashSet<>();
         for (int i = 0; i < words.length; i++) {
-            if (i % n == 0) {
-                loop++;
-            }
             
             String word = words[i];
             if (i > 0) {
                 String bfWord = words[i - 1];
                 
-                if (!word.startsWith(bfWord.substring(bfWord.length() - 1))) {
-                    return new int[]{i % n + 1, loop};
+                if (set.contains(words[i]) || !word.startsWith(bfWord.substring(bfWord.length() - 1))) {
+                    return new int[]{i % n + 1, i / n + 1};
                 }
-            }
-            
-            if (set.contains(words[i])) {
-                return new int[]{i % n + 1, loop};
             }
             set.add(words[i]);
         }
