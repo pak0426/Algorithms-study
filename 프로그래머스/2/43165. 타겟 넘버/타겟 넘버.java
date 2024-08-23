@@ -2,8 +2,8 @@ import java.util.*;
 
 class Solution {
     private int answer = 0;
-    private final int depth = 0;
-    private final int sum = 0;
+    private int depth = 0;
+    private int sum = 0;
     
     public int solution(int[] numbers, int target) {
         dfs(numbers, depth, target, sum);
