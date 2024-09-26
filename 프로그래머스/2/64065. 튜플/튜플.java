@@ -2,37 +2,21 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String s) {
-        s = s.substring(2, s.length() - 2);
+        s = s.substring(0, s.length() - 2).replace("{", "");
+        String[] arr = s.split("},");
+        Arrays.sort(arr, (o1, o2) -> Integer.compare(o1.length(), o2.length()));
         
-        if (!s.contains("},{")) {
-            return new int[]{Integer.parseInt(s)};
-        }
+        Set<String> set = new HashSet<>();
+        int[] answer = new int[arr.length];
         
-        String arr[] = s.split("\\},\\{");
-        
-        Arrays.sort(arr, Comparator.comparingInt(String::length));
-        
-        Set<String> set = new LinkedHashSet<>();
         for (int i = 0; i < arr.length; i++) {
-            String str = arr[i];
-            
-            
-            if (str.contains(",")) {
-                String[] target = str.split(",");
-                for (int j = 0; j < target.length; j++) {
-                    set.add(target[j]);
+            String[] numbers = arr[i].split(",");
+            for (String number : numbers) {
+                if (!set.contains(number)) {
+                    answer[i] = Integer.parseInt(number);
+                    set.add(number);
                 }
             }
-            else {
-                set.add(str);
-            }
-        }
-        
-        int[] answer = new int[set.size()];
-
-        int index = 0;
-        for (String a : set) {
-            answer[index++] = Integer.parseInt(a);
         }
         
         return answer;
