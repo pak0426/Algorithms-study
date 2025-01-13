@@ -16,8 +16,6 @@ class Solution {
             s = Integer.toBinaryString(length);
             
         }
-        System.out.println(Arrays.toString(result));
-        
         
         
         return result;
