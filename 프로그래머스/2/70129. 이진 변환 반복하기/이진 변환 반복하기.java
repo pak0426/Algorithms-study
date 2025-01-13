@@ -2,22 +2,18 @@ import java.util.*;
 
 class Solution {
     public int[] solution(String s) {
-        int[] result = {0, 0};
+        int countTransform = 0;
+        int countZero = 0;
         
-        while (s.length() > 1) {
-            for (char c : s.toCharArray()) {
-                if (c == '0') {
-                    result[1]++;
-                }
-            }
-            result[0]++;
+        while (!s.equals("1")) {
+            countTransform++;
             
-            int length = s.replace("0", "").length();
-            s = Integer.toBinaryString(length);
+            int zero = s.replace("1", "").length();
+            countZero += zero;
             
+            s = Integer.toBinaryString(s.length() - zero);
         }
         
-        
-        return result;
+        return new int[]{countTransform, countZero};
     }
 }
