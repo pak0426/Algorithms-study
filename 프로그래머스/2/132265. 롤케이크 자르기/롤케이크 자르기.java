@@ -4,25 +4,27 @@ public class Solution {
 
     public int solution(int[] topping) {
         int answer = 0;
-
-        HashMap<Integer, Integer> toppingMap = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
+        
         for (int t : topping) {
-            toppingMap.put(t, toppingMap.getOrDefault(t, 0) + 1);
+            map.put(t, map.getOrDefault(t, 0) + 1);
         }
-
-        HashSet<Integer> toppingSet = new HashSet<>();
-
+        
+        Set<Integer> set = new HashSet<>();
+        
         for (int t : topping) {
-            toppingSet.add(t);
-            toppingMap.put(t, toppingMap.get(t) - 1);
-
-            if (toppingMap.get(t) == 0)
-                toppingMap.remove(t);
-
-            if (toppingSet.size() == toppingMap.size())
+            set.add(t);
+            map.put(t, map.get(t) - 1);
+            
+            if (map.get(t) == 0) {
+                map.remove(t);
+            }
+            
+            if (set.size() == map.size()) {
                 answer++;
+            }
         }
-
+        
         return answer;
     }
 
