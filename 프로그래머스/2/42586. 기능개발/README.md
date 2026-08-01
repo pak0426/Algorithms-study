@@ -1,10 +1,10 @@
 # [level 2] 기능개발 - 42586 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42586) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42586?gad_source=1&gad_campaignid=23716289893) 
 
 ### 성능 요약
 
-메모리: 76.7 MB, 시간: 3.20 ms
+메모리: 86.3 MB, 시간: 4.58 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 07월 18일 18:07:06
+2026년 08월 01일 15:09:07
 
 ### 문제 설명
 
